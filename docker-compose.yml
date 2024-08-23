@@ -1,0 +1,15 @@
+services:
+  husky-humble-simulation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: husky-humble-simulation
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Xauthority:/root/.Xauthority
+    env_file:
+      - .env
+    environment:
+      - DISPLAY=$DISPLAY
+      - LIBGL_ALWAYS_SOFTWARE=1 
+    command: bash -c 'source /home/husky/husky_ws/install/setup.bash && ros2 launch husky_gazebo husky_playpen.launch.py'
